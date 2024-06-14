@@ -24,9 +24,19 @@ exports.addCategory = async (req, res) => {
   try {
     const { name, parentId } = req.body;
     const slug = slugify(name);
-    const category = new Category({ name, slug, parentId });
+    const categoryObj = {
+      name,
+      slug,
+      parentId,
+    };
+
+    if (req.file) {
+      categoryObj.categoryImage = `${process.env.API}/public/${req.file.filename}`;
+    }
+
+    const category = new Category(categoryObj);
     const savedCategory = await category.save();
-    res.status(200).json({ category: savedCategory });
+    res.status(201).json({ category: savedCategory });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

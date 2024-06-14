@@ -1,0 +1,17 @@
+/* style.css */
+
+.sidebar {
+  background-color: #eee; /* Light background for sidebar */
+  height: 100vh; /* Full viewport height */
+  position: fixed; /* Fix sidebar position */
+  top: 0;
+  left: 0;
+  padding: 60px; /* Padding for content */
+  box-shadow: inset 0 0 2px grey;
+}
+
+.main-container {
+  margin-left: 17%; /* Adjust the margin to ensure no overlap */
+  padding: 2rem; /* Padding for content */
+  width: 83%; /* Adjust the width accordingly */
+}

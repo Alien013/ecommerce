@@ -2,10 +2,9 @@ const express = require("express");
 const { requireSignin, adminMiddleware } = require("../common-middleware");
 const { createProduct } = require("../controllers/product");
 const multer = require("multer");
+const router = express.Router();
 const shortid = require("shortid");
 const path = require("path");
-
-const router = express.Router();
 
 // Configure multer for file uploads with custom storage settings
 const storage = multer.diskStorage({

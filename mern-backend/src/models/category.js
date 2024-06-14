@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const categorySchema = new mongoose.Schema(
   {
     name: {
@@ -11,6 +12,9 @@ const categorySchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    categoryImage: {
+      type: String,
+    },
     parentId: {
       type: String,
     },
@@ -18,6 +22,6 @@ const categorySchema = new mongoose.Schema(
   { timestamps: true } // Corrected typo: should be "timestamps" instead of "timestamp"
 );
 
-const Category = mongoose.model("category", categorySchema);
+const Category = mongoose.model("Category", categorySchema);
 
 module.exports = Category;
