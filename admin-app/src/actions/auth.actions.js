@@ -1,6 +1,6 @@
+import axiosInstance from "../helpers/axios";
 import axios from "../helpers/axios";
 import { authConstants, userConstants } from "./constants";
-import axiosInstance from "../helpers/axiosInstance";
 
 // Login action
 export const login = (user) => {
@@ -97,26 +97,39 @@ export const isUserLoggedin = () => {
 };
 
 // Logout action
-// import axiosInstance from "../helpers/axiosInstance";
+export const refreshAuthToken = async () => {
+  const refreshToken = window.localStorage.getItem("refreshToken"); // Assuming you have a refresh token stored
+  if (!refreshToken) {
+    throw new Error("No refresh token available");
+  }
+  return await axios.post("/admin/refresh-token", { token: refreshToken });
+};
 
 export const signout = () => {
-  return async (dispatch) => {
+  return async function signoutThunk(dispatch) {
+    console.log("Signout action dispatched");
     try {
       dispatch({ type: authConstants.LOGOUT_REQUEST });
-      const res = await axiosInstance.post("/admin/signout"); // Use the correct URL path here
+
+      // Make the request with the axiosInstance
+      const res = await axiosInstance.post("/admin/signout");
+
+      console.log("Response from server:", res);
       if (res.status === 200) {
+        // console.log("Signout successful");
         localStorage.clear();
         dispatch({ type: authConstants.LOGOUT_SUCCESS });
-      } else {
-        dispatch({
-          type: authConstants.LOGOUT_FAILURE,
-          payload: { error: res.data.error },
-        });
       }
     } catch (error) {
+      console.log(
+        "Signout caught an error:",
+        error.response ? error.response.data : error.message
+      );
       dispatch({
         type: authConstants.LOGOUT_FAILURE,
-        payload: { error: error.message },
+        payload: {
+          error: error.response ? error.response.data : error.message,
+        },
       });
     }
   };
@@ -124,10 +137,34 @@ export const signout = () => {
 
 // export const signout = () => {
 //   return async (dispatch) => {
+//     try {
+//       dispatch({ type: authConstants.LOGOUT_REQUEST });
+//       const res = await axiosInstance.post("/admin/signout");
+//       if (res.status === 200) {
+//         localStorage.clear();
+//         dispatch({ type: authConstants.LOGOUT_SUCCESS });
+//       } else {
+//         dispatch({
+//           type: authConstants.LOGOUT_FAILURE,
+//           payload: { error: res.data.error },
+//         });
+//       }
+//     } catch (error) {
+//       dispatch({
+//         type: authConstants.LOGOUT_FAILURE,
+//         payload: { error: error.message },
+//       });
+//     }
+//   };
+// };
+
+// export const signout = () => {
+//   return async (dispatch) => {
 //     dispatch({ type: authConstants.LOGOUT_REQUEST });
 
 //     try {
 //       const res = await axios.post("/admin/signout");
+
 //       if (res.status === 200) {
 //         localStorage.clear();
 //         dispatch({ type: authConstants.LOGOUT_SUCCESS });

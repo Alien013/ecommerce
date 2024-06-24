@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+// const User = require("../models/user");
 
 exports.requireSignin = (req, res, next) => {
   try {
@@ -28,8 +28,6 @@ exports.requireSignin = (req, res, next) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 };
-
-exports.userMiddleware = (req, res, next) => {};
 
 exports.adminMiddleware = (req, res, next) => {
   if (req.user.role !== "admin") {

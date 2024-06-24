@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import { Card } from "react-bootstrap";
 import { Row, Col, Container } from "react-bootstrap";
 import "./style.css";
+import { NavLink } from "react-router-dom";
 
 const Home = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,37 +18,7 @@ const Home = (props) => {
     return () => clearTimeout(timer);
   }, []);
 
-  return (
-    <Layout>
-      <Container fluid>
-        <Row>
-          <Col md={2} className="sidebar">
-            Sidebar
-          </Col>
-          <Col md={10} className="main-container">
-            {isLoading ? (
-              <div>Loading...</div>
-            ) : (
-              <Card
-                style={{ margin: "2rem", background: "#fff" }}
-                className="text-center"
-              >
-                <Card.Body>
-                  <Card.Title>Welcome to Admin Dashboard</Card.Title>
-                  <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Eius maiores tempore impedit vel possimus, deleniti odio
-                    nostrum numquam inventore. Velit placeat cumque provident,
-                    rerum recusandae cum natus ipsam aspernatur vel?
-                  </p>
-                </Card.Body>
-              </Card>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    </Layout>
-  );
+  return <Layout sidebar>{/*  */}</Layout>;
 };
 
 export default Home;
