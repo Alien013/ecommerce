@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Header from "../Header";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useHref, useLocation } from "react-router-dom";
+import "./style.css";
 
 const Layout = ({ children, sidebar }) => {
   const location = useLocation();
@@ -15,7 +16,6 @@ const Layout = ({ children, sidebar }) => {
         <Container fluid>
           <Row>
             <Col md={2} className="sidebar">
-              {/* Sidebar */}
               <ul>
                 <li>
                   <NavLink to="/">HOME</NavLink>
@@ -31,6 +31,7 @@ const Layout = ({ children, sidebar }) => {
                 </li>
               </ul>
             </Col>
+
             <Col md={10} className="main-container">
               {isDashboard && (
                 <Card

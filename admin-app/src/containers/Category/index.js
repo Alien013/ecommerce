@@ -10,7 +10,7 @@ const Category = (props) => {
   const [show, setShow] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const [parentCategoryId, setParentCategoryId] = useState("");
-  const [categoryImage, setCategoryImage] = useState("");
+  const [categoryImage, setCategoryImage] = useState();
   const category = useSelector((state) => state.category);
 
   useEffect(() => {
@@ -43,6 +43,7 @@ const Category = (props) => {
   };
 
   const handleCategoryImage = (e) => {
+    console.log(e.target.files[0]);
     setCategoryImage(e.target.files[0]);
   };
 

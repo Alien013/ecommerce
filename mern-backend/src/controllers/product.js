@@ -7,6 +7,8 @@ exports.createProduct = async (req, res) => {
     const slug = slugify(name);
     let productPictures = [];
 
+    console.log("ahdkjfadfhkadkfa", req.files);
+
     if (req.files && req.files.length > 0) {
       productPictures = req.files.map((file) => {
         return { img: file.filename };
